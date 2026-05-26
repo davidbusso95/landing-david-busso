@@ -690,3 +690,96 @@ footer {
       aspect-ratio: 16 / 11;
     }
 }
+
+/* ==========================================================
+   MEJORAS MOBILE PARA CASOS REALES
+   Objetivo:
+   - Evitar superposición visual
+   - Reducir altura excesiva en mobile
+   - Mostrar solo una imagen por caso
+========================================================== */
+
+@media (max-width: 880px) {
+  .portfolio-hero {
+    padding: 38px 0 32px;
+  }
+
+  .portfolio-hero h1 {
+    font-size: clamp(2rem, 11vw, 3rem);
+    line-height: 1.05;
+  }
+
+  .portfolio-hero p {
+    font-size: 1rem;
+  }
+
+  .real-cases {
+    gap: 22px;
+  }
+
+  .real-case {
+    padding: 20px;
+  }
+
+  .real-case-grid {
+    gap: 22px;
+  }
+
+  .real-case h2 {
+    font-size: clamp(1.55rem, 8vw, 2.1rem);
+  }
+
+  .case-description,
+  .case-detail p {
+    font-size: 0.98rem;
+  }
+
+  .tech-chips {
+    gap: 8px;
+    margin: 16px 0 22px;
+  }
+
+  .tech-chips span {
+    font-size: 0.84rem;
+    padding: 6px 10px;
+  }
+
+  .case-gallery {
+    margin-top: 4px;
+  }
+
+  .gallery-main .case-image {
+    min-height: auto;
+    aspect-ratio: 16 / 10;
+  }
+
+  .gallery-thumbs {
+    display: none;
+  }
+
+  .case-image {
+    border-radius: 16px;
+  }
+
+  .real-case .btn {
+    width: 100%;
+    text-align: center;
+    margin-top: 18px;
+  }
+
+  .final-cta {
+    padding-top: 24px;
+  }
+
+  .final-cta .cta-box {
+    padding: 28px 22px;
+  }
+
+  .cta-actions {
+    flex-direction: column;
+  }
+
+  .cta-actions .btn {
+    width: 100%;
+  }
+}
