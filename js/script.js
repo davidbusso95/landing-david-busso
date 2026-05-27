@@ -49,7 +49,7 @@ function trackLeadSubmit(formName = 'contact_form') {
   }
 
   if (typeof gtag === 'function') {
-    gtag('event', 'submit_form', {
+    gtag('event', 'generate_lead', {
       event_category: 'lead',
       event_label: formName
     });
