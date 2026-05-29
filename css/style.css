@@ -97,7 +97,11 @@ header {
 }
 
 .btn-primary:hover {
-    transform: translateY(-2px);
+  transform: translateY(-2px);
+}
+
+.case-button {
+  margin-top: 28px;
 }
 
 .btn-outline {
@@ -722,7 +726,13 @@ footer {
   }
 
   .real-case-grid {
+    display: flex;
+    flex-direction: column;
     gap: 22px;
+  }
+
+  .case-content {
+  display: contents;
   }
 
   .real-case h2 {
@@ -746,6 +756,7 @@ footer {
 
   .case-gallery {
     margin-top: 4px;
+    order: 2;
   }
 
   .gallery-main .case-image {
@@ -761,10 +772,15 @@ footer {
     border-radius: 16px;
   }
 
+  .case-button {
+    order: 3;
+    width: 100%;
+    margin-top: 18px;
+  }
+
   .real-case .btn {
     width: 100%;
     text-align: center;
-    margin-top: 18px;
   }
 
   .final-cta {
