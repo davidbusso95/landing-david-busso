@@ -1,28 +1,4 @@
 /* ==========================================================
-   EFECTO INTERACTIVO TARJETAS SERVICIOS
-========================================================== */
-
-const cards = document.querySelectorAll('.card');
-
-cards.forEach((card) => {
-  card.addEventListener('mousemove', (e) => {
-    const rect = card.getBoundingClientRect();
-
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
-    card.style.setProperty('--x', `${x}px`);
-    card.style.setProperty('--y', `${y}px`);
-  });
-
-  card.addEventListener('mouseleave', () => {
-    card.style.removeProperty('--x');
-    card.style.removeProperty('--y');
-  });
-});
-
-
-/* ==========================================================
    TRACKING GOOGLE ANALYTICS + META PIXEL
 ========================================================== */
 
@@ -143,24 +119,27 @@ if (lightbox && lightboxImage && lightboxClose) {
 
 
 /* ==========================================================
-   BOTONES WHATSAPP CASOS REALES
+   BOTONES WHATSAPP
 ========================================================== */
 
 document.querySelectorAll('[data-track-contact]').forEach((button) => {
 
   button.addEventListener('click', () => {
+    trackWhatsAppClick(button.dataset.trackLabel || 'whatsapp_button');
 
-    if (typeof fbq === 'function') {
-      fbq('track', 'Contact');
-    }
+  });
 
-    if (typeof gtag === 'function') {
-      gtag('event', 'click_whatsapp', {
-        event_category: 'engagement',
-        event_label: 'cases_page_whatsapp'
-      });
-    }
+});
 
+
+/* ==========================================================
+   BOTONES CASOS REALES
+========================================================== */
+
+document.querySelectorAll('[data-track-cases]').forEach((button) => {
+
+  button.addEventListener('click', () => {
+    trackViewCasesClick(button.dataset.trackLabel || 'cases_button');
   });
 
 });
@@ -171,9 +150,9 @@ document.querySelectorAll('[data-track-contact]').forEach((button) => {
 
 const contactForm = document.getElementById('contact-form');
 
-    if (contactForm) {
-      contactForm.addEventListener('submit', function (event) {
-      event.preventDefault();
+if (contactForm) {
+  contactForm.addEventListener('submit', function (event) {
+    event.preventDefault();
 
     if (typeof trackLeadSubmit === 'function') {
       trackLeadSubmit('main_contact_form');
@@ -183,4 +162,48 @@ const contactForm = document.getElementById('contact-form');
       contactForm.submit();
     }, 500);
   });
+}
+
+
+window.trackWhatsAppClick = trackWhatsAppClick;
+window.trackLeadSubmit = trackLeadSubmit;
+window.trackViewCasesClick = trackViewCasesClick;
+
+
+/* ==========================================================
+   NAVEGACIÓN MOBILE
+========================================================== */
+
+const navToggle = document.querySelector('.nav-toggle');
+const navLinks = document.getElementById('primary-navigation');
+
+if (navToggle && navLinks) {
+
+  function setMobileMenuState(isOpen) {
+    navToggle.classList.toggle('is-open', isOpen);
+    navLinks.classList.toggle('is-open', isOpen);
+    navToggle.setAttribute('aria-expanded', String(isOpen));
+    navToggle.setAttribute(
+      'aria-label',
+      isOpen ? 'Cerrar menú de navegación' : 'Abrir menú de navegación'
+    );
+  }
+
+  navToggle.addEventListener('click', () => {
+    setMobileMenuState(!navLinks.classList.contains('is-open'));
+  });
+
+  navLinks.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      setMobileMenuState(false);
+    });
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && navLinks.classList.contains('is-open')) {
+      setMobileMenuState(false);
+      navToggle.focus();
+    }
+  });
+
 }

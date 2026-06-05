@@ -6,18 +6,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- SEO -->
-  <title>Casos Reales | David Busso Automation Developer</title>
+  <title>Casos reales de automatización y soluciones digitales | David Busso</title>
   <meta
     name="description"
-    content="Casos reales de automatización e IA desarrollados por David Busso para negocios: WhatsApp, IA, sistemas internos, leads, reportes y video automation."
+    content="Casos reales de automatización, IA, integraciones, sistemas internos y soluciones digitales desarrolladas para negocios."
   />
+  <link rel="canonical" href="https://www.davidbusso.com/casos.html" />
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Casos Reales | David Busso Automation Developer" />
+  <meta property="og:title" content="Casos reales de automatización y soluciones digitales | David Busso" />
   <meta
     property="og:description"
-    content="Casos reales de automatización, IA, sistemas internos, leads, reportes, WhatsApp y video automation desarrollados para negocios."
+    content="Casos reales de automatización, IA, integraciones, sistemas internos y soluciones digitales desarrolladas para negocios."
   />
   <meta property="og:url" content="https://www.davidbusso.com/casos.html" />
   <meta property="og:image" content="https://www.davidbusso.com/assets/og-image.png" />
@@ -27,10 +28,10 @@
 
   <!-- Twitter / X Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Casos Reales | David Busso Automation Developer" />
+  <meta name="twitter:title" content="Casos reales de automatización y soluciones digitales | David Busso" />
   <meta
     name="twitter:description"
-    content="Casos reales de automatización, IA, sistemas internos, leads, reportes, WhatsApp y video automation desarrollados para negocios."
+    content="Casos reales de automatización, IA, integraciones, sistemas internos y soluciones digitales desarrolladas para negocios."
   />
   <meta name="twitter:image" content="https://www.davidbusso.com/assets/og-image.png" />
 
@@ -39,6 +40,8 @@
 
   <!-- Estilos -->
   <link rel="stylesheet" href="./css/style.css" />
+  <link rel="preconnect" href="https://www.googletagmanager.com" />
+  <link rel="preconnect" href="https://connect.facebook.net" />
 
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-88K8EC1BDS"></script>
@@ -82,14 +85,27 @@
   <header>
     <div class="container nav">
       <a class="brand" href="index.html">
-        David Busso <span>/ Automation Developer</span>
+        David Busso <span>/ Soluciones digitales</span>
       </a>
 
-      <nav class="nav-links">
+      <button
+        class="nav-toggle"
+        type="button"
+        aria-label="Abrir menú de navegación"
+        aria-expanded="false"
+        aria-controls="primary-navigation"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="nav-links" id="primary-navigation">
         <a href="index.html">Inicio</a>
         <a href="index.html#servicios">Servicios</a>
-        <a href="index.html#proceso">Proceso</a>
-        <a href="index.html#contacto" class="btn btn-outline">Contacto</a>
+        <a href="index.html#casos">Casos</a>
+        <a href="index.html#mantenimiento">Mantenimiento</a>
+        <a href="index.html#contacto" class="btn btn-primary">Contacto</a>
       </nav>
     </div>
   </header>
@@ -157,6 +173,7 @@
                 target="_blank"
                 rel="noopener noreferrer"
                 data-track-contact
+                data-track-label="case_whatsapp_bot"
               >
                 Consultar por una solución similar
               </a>
@@ -233,6 +250,7 @@
                 target="_blank"
                 rel="noopener noreferrer"
                 data-track-contact
+                data-track-label="case_sheets_system"
               >
                 Consultar por una solución similar
               </a>
@@ -315,6 +333,7 @@
                 target="_blank"
                 rel="noopener noreferrer"
                 data-track-contact
+                data-track-label="case_video_automation"
               >
                 Consultar por una solución similar
               </a>
@@ -392,6 +411,7 @@
                 target="_blank"
                 rel="noopener noreferrer"
                 data-track-contact
+                data-track-label="case_leads_system"
               >
                 Consultar por una solución similar
               </a>
@@ -468,6 +488,7 @@
                 target="_blank"
                 rel="noopener noreferrer"
                 data-track-contact
+                data-track-label="case_reviews_ai"
               >
                 Consultar por una solución similar
               </a>
@@ -527,6 +548,7 @@
                 target="_blank"
                 rel="noopener noreferrer"
                 data-track-contact
+                data-track-label="cases_final_cta"
               >
                 Consultar por WhatsApp
               </a>
@@ -565,6 +587,7 @@
     target="_blank"
     rel="noopener noreferrer"
     data-track-contact
+    data-track-label="floating_whatsapp_button"
     aria-label="WhatsApp"
   >
     <svg
@@ -582,11 +605,11 @@
   <!-- Footer -->
   <footer>
     <div class="container">
-      David Busso - Automation & Systems Developer
+      David Busso - Soluciones digitales para negocios
     </div>
   </footer>
 
   <!-- Scripts externos -->
-  <script src="./js/script.js"></script>
+  <script src="./js/script.js" defer></script>
 </body>
 </html>
