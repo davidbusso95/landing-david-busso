@@ -577,6 +577,49 @@ form {
   gap: 12px;
 }
 
+[hidden] {
+  display: none !important;
+}
+
+.form-error {
+  border: 1px solid #fecaca;
+  border-radius: 14px;
+  background: #fef2f2;
+  color: #b91c1c;
+  padding: 12px 14px;
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.form-success {
+  display: grid;
+  gap: 10px;
+  border: 1px solid #bbf7d0;
+  border-radius: 20px;
+  background: #f0fdf4;
+  padding: 28px;
+}
+
+.form-success h3 {
+  color: var(--text);
+  font-size: 1.3rem;
+  line-height: 1.2;
+}
+
+.form-success p {
+  color: var(--muted);
+}
+
+.form-success .text-link {
+  margin-top: 4px;
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 0.94rem;
+  text-align: left;
+  cursor: pointer;
+}
+
 form label {
   color: var(--text);
   font-size: 0.92rem;
@@ -708,6 +751,39 @@ textarea {
 }
 
 .case-button {
+  margin-top: 28px;
+}
+
+.featured-project {
+  border: 1px solid #bcd2fb;
+  border-radius: 28px;
+  background: linear-gradient(180deg, #ffffff 0%, #eef4ff 100%);
+  box-shadow: var(--shadow);
+  padding: 36px;
+}
+
+.featured-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+  padding: 7px 14px;
+  border: 1px solid var(--primary);
+  border-radius: 999px;
+  background: #ffffff;
+  color: var(--primary);
+  font-size: 0.86rem;
+  font-weight: 800;
+}
+
+.featured-project h2 {
+  font-size: clamp(1.9rem, 3.6vw, 2.8rem);
+}
+
+.featured-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
   margin-top: 28px;
 }
 
@@ -899,7 +975,8 @@ footer {
 
   .hero-actions .btn,
   .cases-actions .btn,
-  .cta-actions .btn {
+  .cta-actions .btn,
+  .featured-actions .btn {
     width: 100%;
     text-align: center;
   }
@@ -911,7 +988,8 @@ footer {
   .hero-card,
   .maintenance-panel,
   .cta-box,
-  .real-case {
+  .real-case,
+  .featured-project {
     padding: 22px;
     border-radius: 20px;
   }
@@ -935,13 +1013,15 @@ footer {
     order: 2;
   }
 
-  .case-button {
+  .case-button,
+  .featured-actions {
     order: 3;
     width: 100%;
     margin-top: 18px;
   }
 
-  .real-case .btn {
+  .real-case .btn,
+  .featured-project .btn {
     width: 100%;
   }
 

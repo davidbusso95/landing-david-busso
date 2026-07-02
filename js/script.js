@@ -46,6 +46,22 @@ function trackViewCasesClick(source = 'cases_button') {
 }
 
 
+function trackDemoClick(label = 'demo_button') {
+
+  if (typeof fbq === 'function') {
+    fbq('trackCustom', 'ClickDemoSaaS', { label });
+  }
+
+  if (typeof gtag === 'function') {
+    gtag('event', 'click_demo_saas', {
+      event_category: 'engagement',
+      event_label: label
+    });
+  }
+
+}
+
+
 /* ==========================================================
    LIGHTBOX CASOS REALES
 ========================================================== */
@@ -58,7 +74,7 @@ if (lightbox && lightboxImage && lightboxClose) {
 
   function openLightbox(image) {
 
-    lightboxImage.src = image.src;
+    lightboxImage.src = image.currentSrc || image.src;
     lightboxImage.alt = image.alt;
 
     lightbox.classList.add('is-open');
@@ -144,23 +160,105 @@ document.querySelectorAll('[data-track-cases]').forEach((button) => {
 
 });
 
+
 /* ==========================================================
-   FORM TRACKING WITH DELAY BEFORE SUBMIT
+   BOTONES DEMO (PROYECTOS PROPIOS)
+========================================================== */
+
+document.querySelectorAll('[data-track-demo]').forEach((button) => {
+
+  button.addEventListener('click', () => {
+    trackDemoClick(button.dataset.trackLabel || 'demo_button');
+  });
+
+});
+
+/* ==========================================================
+   ENVÍO DEL FORMULARIO POR AJAX (SIN SALIR DEL SITIO)
 ========================================================== */
 
 const contactForm = document.getElementById('contact-form');
+const contactFormSubmitButton = document.getElementById('contact-form-submit');
+const formErrorMessage = document.getElementById('form-error-message');
+const formSuccessMessage = document.getElementById('form-success-message');
+const formSuccessReset = document.getElementById('form-success-reset');
+
+function showFormError(message) {
+  if (!formErrorMessage) return;
+  formErrorMessage.textContent = message;
+  formErrorMessage.hidden = false;
+}
+
+function hideFormError() {
+  if (!formErrorMessage) return;
+  formErrorMessage.hidden = true;
+  formErrorMessage.textContent = '';
+}
 
 if (contactForm) {
   contactForm.addEventListener('submit', function (event) {
     event.preventDefault();
 
-    if (typeof trackLeadSubmit === 'function') {
-      trackLeadSubmit('main_contact_form');
+    hideFormError();
+
+    if (contactFormSubmitButton) {
+      contactFormSubmitButton.disabled = true;
     }
 
-    setTimeout(function () {
-      contactForm.submit();
-    }, 500);
+    fetch(contactForm.action, {
+      method: 'POST',
+      body: new FormData(contactForm),
+      headers: { Accept: 'application/json' },
+    })
+      .then(function (response) {
+        return response.json().then(function (data) {
+          return { ok: response.ok, data: data };
+        }).catch(function () {
+          return { ok: response.ok, data: null };
+        });
+      })
+      .then(function (result) {
+        if (!result.ok) {
+          const errors =
+            result.data &&
+            Array.isArray(result.data.errors) &&
+            result.data.errors.map(function (error) { return error.message; }).join(', ');
+
+          throw new Error(
+            errors || 'No se pudo enviar el formulario. Probá de nuevo en unos minutos.'
+          );
+        }
+
+        if (typeof trackLeadSubmit === 'function') {
+          trackLeadSubmit('main_contact_form');
+        }
+
+        contactForm.hidden = true;
+
+        if (formSuccessMessage) {
+          formSuccessMessage.hidden = false;
+          formSuccessMessage.focus();
+        }
+      })
+      .catch(function (error) {
+        showFormError(
+          error.message ||
+          'Hubo un problema al enviar tu consulta. Probá de nuevo o escribime por WhatsApp.'
+        );
+      })
+      .finally(function () {
+        if (contactFormSubmitButton) {
+          contactFormSubmitButton.disabled = false;
+        }
+      });
+  });
+}
+
+if (formSuccessReset && contactForm && formSuccessMessage) {
+  formSuccessReset.addEventListener('click', function () {
+    contactForm.reset();
+    contactForm.hidden = false;
+    formSuccessMessage.hidden = true;
   });
 }
 
@@ -168,6 +266,7 @@ if (contactForm) {
 window.trackWhatsAppClick = trackWhatsAppClick;
 window.trackLeadSubmit = trackLeadSubmit;
 window.trackViewCasesClick = trackViewCasesClick;
+window.trackDemoClick = trackDemoClick;
 
 
 /* ==========================================================
